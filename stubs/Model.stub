@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+___MODEL_TRAIT_CLASS_ARRAY___
+
+class ___CLASS___ extends Model
+{
+    use ___MODEL_TRAIT_ARRAY___;
+
+___RELATION_ARRAY___
+}

@@ -1,0 +1,23 @@
+
+    /**
+     * Get the balance.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function balance(): Attribute
+    {
+        $in_amount = $this->transactions()->where('direction', 'in')->sum('amount');
+        $out_amount = $this->transactions()->where('direction', 'out')->sum('amount');
+        $current_balance = $this->opening_balance + $in_amount - $out_amount;
+        return Attribute::get(fn () => $current_balance);
+    }
+
+    /**
+     * Get the opening check.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function openingCheck(): Attribute
+    {
+        return Attribute::get(fn () => ($this->opening_balance > 0 && $this->opening_date) ? true : false);
+    }

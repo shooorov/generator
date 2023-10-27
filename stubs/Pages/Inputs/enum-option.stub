@@ -1,0 +1,4 @@
+                                        <label class="inline-flex items-center mr-5">
+                                            <input v-model="form.___COLUMN___" value="___OPTION___" type="radio" class="form-radio w-5 h-5 border-primary-500 text-primary-500 cursor-pointer focus:ring-primary-500">
+                                            <span class="ml-2 tracking-wide cursor-pointer"> ___OPTION_TITLE___ </span>
+                                        </label><br>

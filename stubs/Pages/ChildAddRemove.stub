@@ -1,0 +1,11 @@
+        removeItem(index){
+            if (confirm('Are you sure you want to delete this element?')) {
+                this.form.group____CHILD_OBJECT_PLURAL___.splice(index, 1);
+            }
+        },
+
+        addItem(){
+            this.form.group____CHILD_OBJECT_PLURAL___.push({
+                ___FORM_COLUMN_CREATE_ARRAY___
+            });
+        },

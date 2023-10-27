@@ -1,0 +1,6 @@
+                                <div class="col-span-6 ___VUE_CLASS_CSS___">
+                                    <div class="mt-6 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+                                        <input v-model="form.___COLUMN___" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer" >
+                                        <label for="___COLUMN___" @click="form.___COLUMN___ = !(form.___COLUMN___)" class="ml-5 block cursor-pointer"> ___TITLE___ </label>
+                                    </div>
+                                </div>

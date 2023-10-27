@@ -1,0 +1,4 @@
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                                    <label class="block text-sm font-medium text-gray-700">___TITLE___</label>
+                                    <Combobox class="mt-1 w-full" v-model="form.___COLUMN___" :items="___OBJECT_PLURAL___.map((item) => { return { id: item.id, name: item.name?? item.title } })" />
+                                </dd>

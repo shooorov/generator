@@ -1,0 +1,16 @@
+                <form @submit.prevent="submit" class="">
+                    <dl class="px-8 py-5 max-w-full">
+                        <div class="sm:grid sm:grid-cols-4 sm:gap-4">
+                            ___INDEX_FILTER_INPUTS_ARRAY___
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                <input v-model="form.start_date" @change="submit" type="date" class="mt-1 block w-full px-4 focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded">
+                            </dd>
+
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                <input v-model="form.end_date" @change="submit" type="date" class="mt-1 block w-full px-4 focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded">
+                            </dd>
+                        </div>
+                    </dl>
+                </form>

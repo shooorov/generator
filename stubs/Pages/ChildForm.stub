@@ -1,0 +1,4 @@
+
+            group____CHILD_OBJECT_PLURAL___: props.___CHILD_OBJECT_PLURAL___.length? props.___CHILD_OBJECT_PLURAL___ : [{
+                ___FORM_COLUMN_CREATE_ARRAY___
+            }],

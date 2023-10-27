@@ -1,0 +1,47 @@
+{
+    "name": "shooorov/generator",
+    "description": "Fast and easy way to create base files",
+    "keywords": [
+        "shooorov",
+        "generator",
+        "laravel",
+        "vue",
+		"builder",
+		"quick builder"
+    ],
+    "homepage": "https://github.com/shooorov/generator",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shooorov\\Generator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shourov Shahadat",
+            "email": "shooorov@gmail.com"
+        },
+        {
+            "name": "Arif Hasan",
+            "email": "arif.saiket@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shooorov\\Generator\\GeneratorServiceProvider"
+            ],
+            "aliases": {
+                "Generator": "Shooorov\\Generator\\Facades\\Generator"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^9.0|^10.0",
+        "illuminate/support": "^9.0|^10.0",
+        "illuminate/database": "^9.0|^10.0"
+	}
+}

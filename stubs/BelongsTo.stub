@@ -1,0 +1,7 @@
+    /**
+     * Get the ___OBJECT___ of the ___PARENT_CLASS___.
+     */
+    public function ___OBJECT___()
+    {
+        return $this->belongsTo(___CLASS___::class);
+    }

@@ -1,0 +1,8 @@
+    /**
+     * The ___CLASS___'s ___COLUMN___.
+     *
+     * @var array
+     */
+    public $___COLUMN___ = [
+        ___ENUM_OPTIONS_ARRAY___
+    ];

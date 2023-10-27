@@ -1,0 +1,5 @@
+                                <div class="col-span-6 ___VUE_CLASS_CSS___">
+                                    <label for="___COLUMN___" class="block text-sm font-medium text-gray-700"> ___TITLE___ ___COLUMN_REQUISITE___</label>
+                                    <input v-model="form.___COLUMN___" id="___COLUMN___" type="date" class="mt-1 focus:ring-primary-400 focus:border-primary-400 block w-full shadow-sm sm:text-sm border-gray-300 rounded" />
+                                    <InputError :message="errors.___COLUMN___" />
+                                </div>

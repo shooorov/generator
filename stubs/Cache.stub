@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Cache;
+
+use App\Models\___CLASS___ as Models___CLASS___;
+use App\UseOrganization;
+use Illuminate\Support\Facades\Cache;
+
+class Cache___CLASS___
+{
+    private static $key = '___CLASS___';
+
+    public static function get()
+    {
+        $org_key = UseOrganization::short() . ':' . self::$key;
+        return Cache::remember($org_key, now()->addHours(24), function () {
+            return Models___CLASS___::get();
+        });
+    }
+
+    public static function find($value, $field_name = 'id')
+    {
+        return self::get()->first(fn ($i) => $i->$field_name == $value);
+    }
+
+    public static function forget()
+    {
+        $org_key = UseOrganization::short() . ':' . self::$key;
+        if (Cache::has($org_key)) {
+            Cache::forget($org_key);
+        }
+    }
+}

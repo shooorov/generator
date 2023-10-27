@@ -1,0 +1,152 @@
+<template>
+    <Head><title> Edit {{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} </title></Head>
+
+    <AppLayout>
+        <div class="bg-white shadow">
+            <div class="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+                <div class="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
+                    <div class="flex-1 min-w-0">
+                        <Breadcrumb :breadcrumbs="breadcrumbs" />
+                    </div>
+
+                    <div class="mt-6 h-9 flex space-x-3 md:mt-0 md:ml-4">
+                        <Link :href="route('___OBJECT___.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
+                            <PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            Create
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow sm:rounded-lg">
+                <div class="flex justify-between px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium">{{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} Edit</p>
+
+                    <div class="flex-shrink-0 flex space-x-3">
+                        <ModelOptions :detailHref="route('___OBJECT___.show', ___OBJECT___.id)" :editHref="null" :deleteHref="route('___OBJECT___.destroy', ___OBJECT___.id)" deleteMessage="Do you really want to delete this ___OBJECT___?" />
+                    </div>
+                </div>
+
+                <Alert :message="alertMessage" :errors="errors" />
+
+                <form @submit.prevent="submit">
+                    <dl class="space-y-8 py-6">
+                        <div class="max-w-xl mx-auto">
+                            <div class="grid grid-cols-6 gap-4">
+___FORM_INPUT_FIELD___
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-t border-gray-300" /></div>
+                            <div class="relative flex justify-center">
+                                <span class="px-3 bg-white text-lg font-medium text-gray-900"></span>
+                            </div>
+                        </div>
+
+                        <div class="max-w-xl mx-auto">
+                            <div class="flex justify-end">
+                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </dl>
+                </form>
+            </div>
+        </div>
+    </AppLayout>
+
+</template>
+
+<script>
+import { reactive } from 'vue'
+import { router, Head, Link } from '@inertiajs/vue3'
+import {
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems
+} from '@headlessui/vue'
+
+import Alert from '@/Components/Alert.vue';
+import AppLayout from '@/Layouts/Authenticated.vue';
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Combobox from '@/Components/Combobox.vue';
+import InputError from '@/Components/InputError.vue';
+import ModelOptions from '@/Components/ModelOptions.vue';
+
+import {
+    ChevronDownIcon,
+    PlusIcon,
+    XMarkIcon,
+} from '@heroicons/vue/24/solid'
+
+import {
+    ArrowTopRightOnSquareIcon,
+    CogIcon,
+    PencilSquareIcon,
+    TrashIcon,
+} from '@heroicons/vue/24/outline'
+
+export default {
+    layout: AppLayout,
+
+    components: {
+        Menu,
+        MenuButton,
+        MenuItem,
+        MenuItems,
+        Alert,
+        ModelOptions,
+        Breadcrumb,
+        Combobox,
+        InputError,
+        Head,
+        Link,
+
+        ArrowTopRightOnSquareIcon,
+        ChevronDownIcon,
+        CogIcon,
+        PencilSquareIcon,
+        PlusIcon,
+        TrashIcon,
+        XMarkIcon,
+    },
+
+    props: {
+        errors: Object,
+        alertMessage: Object,
+        string_change: Object,
+
+        ___OBJECT___: Object,
+
+        ___PARAMS_ARRAY___
+    },
+
+    setup (props) {
+        const breadcrumbs = [
+            { name: props.string_change.___OBJECT____plural?? '___NAME_PLURAL___', href: route('___OBJECT___.index'), current: false },
+            { name: 'Edit Page', href: '#', current: false },
+        ]
+
+        const form = reactive({
+            ___FORM_COLUMN_ARRAY___
+        })
+
+        function submit() {
+            router.patch(route('___OBJECT___.update', props.___OBJECT___.id), form)
+        }
+
+        return {
+            breadcrumbs,
+
+            form,
+            submit
+        }
+    }
+}
+</script>

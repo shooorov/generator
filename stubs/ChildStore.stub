@@ -1,0 +1,12 @@
+foreach ($request->group____CHILD_OBJECT_PLURAL___ ?? [] as $item) {
+            if (!$item['description']) {
+                continue;
+            }
+
+            ___CHILD_CLASS___::create(
+                [
+                    ___CHILD_OBJECT_STORE_COLUMNS_ARRAY___
+                    '___OBJECT____id' => $___OBJECT___->id
+                ]
+            );
+        }

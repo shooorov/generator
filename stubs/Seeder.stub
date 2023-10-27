@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Organization;
+use App\Models\___CLASS___;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
+
+class ___CLASS___Seeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Schema::disableForeignKeyConstraints();
+        ___CLASS___::truncate();
+        Schema::enableForeignKeyConstraints();
+
+        ___CLASS___::factory(5)->create();
+    }
+}

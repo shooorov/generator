@@ -1,0 +1,9 @@
+
+    /**
+     * The accessors to append to the ___CLASS___'s array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        ___MODEL_APPENDS_ARRAY___
+    ];

@@ -1,0 +1,121 @@
+<template>
+    <Head><title> {{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} </title></Head>
+
+    <AppLayout>
+        <div class="bg-white shadow">
+            <div class="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+                <div class="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
+                    <div class="flex-1 min-w-0">
+                        <Breadcrumb :breadcrumbs="breadcrumbs" />
+                    </div>
+                    <div class="mt-6 h-9 flex space-x-3 md:mt-0 md:ml-4">
+                        <Link :href="route('___OBJECT___.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
+                            <PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            Create
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow sm:rounded-lg overflow-hidden">
+
+                <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
+                        <div class="ml-4 mt-4">
+                            <div class="flex items-center">
+                                <div>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900"> {{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} </h3>
+
+                                    <p class="mt-1 max-w-2xl text-sm text-gray-500"> {{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} details and information. </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex-shrink-0 flex">
+                            <ModelOptions :detailHref="null" :editHref="route('___OBJECT___.edit', ___OBJECT___.id)" :deleteHref="route('___OBJECT___.destroy', ___OBJECT___.id)" deleteMessage="Do you really want to delete this ___OBJECT___?" />
+                        </div>
+                    </div>
+                </div>
+
+                <Alert :message="alertMessage" :errors="errors" />
+
+                <div class="px-4 py-5 sm:px-6">
+                    <dl>
+                        <div class="max-w-6xl mx-auto">
+                            <div v-for="item, index in data" :key="index" :class="[index % 2 == 1 ? 'bg-white' : 'bg-gray-50', 'px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6']">
+                                <dt class="text-sm font-medium text-gray-500"> {{ item.name }} </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <span class="capitalize"> {{ item.value }} </span>
+                                </dd>
+                            </div>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </AppLayout>
+
+</template>
+
+<script>
+import { Head, Link } from '@inertiajs/vue3'
+
+import Alert from '@/Components/Alert.vue';
+import AppLayout from '@/Layouts/Authenticated.vue';
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import ModelOptions from '@/Components/ModelOptions.vue';
+
+import {
+    ChevronDownIcon,
+    EnvelopeIcon,
+    PencilSquareIcon,
+    PhoneIcon,
+    PlusIcon,
+    TrashIcon,
+} from '@heroicons/vue/24/solid'
+
+export default {
+    layout: AppLayout,
+
+    components: {
+        Alert,
+        Breadcrumb,
+        ModelOptions,
+        Head,
+        Link,
+
+        ChevronDownIcon,
+        EnvelopeIcon,
+        PencilSquareIcon,
+        PhoneIcon,
+        PlusIcon,
+        TrashIcon,
+    },
+
+    props: {
+        errors: Object,
+        alertMessage: Object,
+        string_change: Object,
+
+        ___OBJECT___: Object,
+    },
+
+    setup(props) {
+        const breadcrumbs = [
+            { name: props.string_change.___OBJECT____plural, href: route('___OBJECT___.index'), current: false },
+            { name: 'Detail Page', href: '#', current: false },
+        ]
+
+        const data = [
+            ___SHOW_DATA_ARRAY___
+        ]
+
+        return {
+            breadcrumbs,
+            data,
+        }
+    },
+}
+</script>

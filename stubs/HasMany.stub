@@ -1,0 +1,7 @@
+    /**
+     * Get the ___OBJECT_PLURAL___ for the ___PARENT_CLASS___.
+     */
+    public function ___OBJECT_PLURAL___()
+    {
+        return $this->hasMany(___CLASS___::class);
+    }

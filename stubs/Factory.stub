@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\___CLASS___;
+use App\Models\Organization;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class ___CLASS___Factory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ___CLASS___::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, string>
+     */
+    public function definition()
+    {
+        return [
+            ___FACTORY_COLUMNS_ARRAY___
+            'organization_id'   => rand(1, Organization::count()),
+        ];
+    }
+}

@@ -1,0 +1,4 @@
+
+                                            <td>
+                                                <input v-model="group_item.___COLUMN___" placeholder="___TITLE___" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="block w-full px-2 focus:ring-none focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded" />
+                                            </td>

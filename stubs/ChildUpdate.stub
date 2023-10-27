@@ -1,0 +1,22 @@
+$previous____CHILD_OBJECT_PLURAL___ = $___OBJECT___->___CHILD_OBJECT_PLURAL___->pluck('id')->toArray();
+        foreach ($request->group____CHILD_OBJECT_PLURAL___ ?? [] as $item) {
+            if (!$item['description']) {
+                continue;
+            }
+
+            $id = array_key_exists('id', $item) ? $item['id'] : null;
+            if (($key = array_search($id, $previous____CHILD_OBJECT_PLURAL___)) !== false) {
+                unset($previous____CHILD_OBJECT_PLURAL___[$key]);
+            }
+
+            ___CHILD_CLASS___::updateOrCreate(
+                [
+                    'id' => $id,
+                    '___OBJECT____id' => $___OBJECT___->id
+                ],
+                [
+                    ___CHILD_OBJECT_MODIFY_COLUMNS_ARRAY___
+                ]
+            );
+        }
+        ___CHILD_CLASS___::where('___OBJECT____id', $___OBJECT___->id)->whereIn('id', $previous____CHILD_OBJECT_PLURAL___)->delete();

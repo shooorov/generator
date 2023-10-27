@@ -1,0 +1,46 @@
+
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-t border-gray-300" /></div>
+                            <div class="relative flex justify-center">
+                                <span class="px-3 bg-white text-lg font-medium text-gray-900">{{ string_change.___CHILD_OBJECT____plural?? '___CHILD_NAME_PLURAL___' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="max-w-xl mx-auto">
+                            <table class="table-auto sm:table-fixed min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="w-10 px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+                                        ___CHILD_TABLE_HEAD___
+                                        <th scope="col" class="w-10 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr v-for="(group_item, index) in form.group____CHILD_OBJECT_PLURAL___" :key="index">
+                                        <td>
+                                            <div class="text-sm leading-5 text-gray-700 text-center"> {{ (index + 1) }} </div>
+                                        </td>
+                                        ___CHILD_TABLE_ROW___
+
+                                        <td>
+                                            <button v-show="form.group____CHILD_OBJECT_PLURAL___.length > 1" @click="[removeItem(index)]" type="button" class="p-1 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                <XMarkIcon class="h-4 w-4" aria-hidden="true" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                <tfoot class="bg-white">
+                                    <tr>
+                                        <th class="text-left pt-3"></th>
+                                        <th colspan="3" class="text-left pt-3">
+                                            <button @click="addItem()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                                Add Item
+                                                <PlusIcon class="ml-2 -mr-0.5 h-4 w-4" aria-hidden="true" />
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>

@@ -1,0 +1,188 @@
+<?php
+
+___NAMESPACE___
+
+use App\Http\Controllers\Controller;
+use App\Helpers;
+use App\Http\Cache\Cache___CLASS___;
+___DEPENDENCY_TRAITS_ARRAY___
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\UseOrganization;
+use Inertia\Inertia;
+
+class ___CLASS___Controller extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        ___FILTERING___
+        ___PARAMS_HELPERS_ARRAY___
+
+        $params = [
+            '___OBJECT_PLURAL___'       => ___PARAM_OBJECT_PLURAL___,
+            ___PARAMS_ARRAY___
+___FILTER_PARAMS___
+        ];
+        return Inertia::render('___DIRECTORY___/___CLASS___/Index', $params);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        ___PARAMS_HELPERS_ARRAY___
+
+        $params = [
+            ___PARAMS_ARRAY___
+        ];
+        return Inertia::render('___DIRECTORY___/___CLASS___/Create', $params);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            ___STORE_VALIDATION_ARRAY___
+        ]);
+
+        DB::beginTransaction();
+
+        $___OBJECT___ = new ___CLASS___;
+        ___OBJECT_STORE_COLUMNS_ARRAY___
+        $___OBJECT___->organization_id   = UseOrganization::id();
+        $___OBJECT___->save();
+
+        ___CHILD_STORE______HAS_ADDRESS______HAS_DESCRIPTION___
+        DB::commit();
+        Cache___CLASS___::forget();
+
+        return redirect()->route('___OBJECT___.index')->with('success', __('___CLASS___ added successfully'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  ___CLASS___  $___OBJECT___
+     * @return Response
+     */
+    public function show(___CLASS___ $___OBJECT___)
+    {
+        $params = [
+            '___OBJECT___' => ___PARAM_OBJECT___,
+        ];
+        return Inertia::render('___DIRECTORY___/___CLASS___/Show', $params);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  ___CLASS___  $___OBJECT___
+     * @return Response
+     */
+    public function edit(___CLASS___ $___OBJECT___)
+    {
+        ___PARAMS_HELPERS_ARRAY___
+
+        $params = [
+            '___OBJECT___' => ___PARAM_OBJECT___,
+            ___PARAMS_ARRAY______CHILD_PARAMS_ARRAY___
+        ];
+        return Inertia::render('___DIRECTORY___/___CLASS___/Edit', $params);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  ___CLASS___  $___OBJECT___
+     * @return Response
+     */
+    public function update(Request $request, ___CLASS___ $___OBJECT___)
+    {
+        $request->validate([
+            ___MODIFY_VALIDATION_ARRAY___
+        ]);
+
+        DB::beginTransaction();
+
+        ___OBJECT_MODIFY_COLUMNS_ARRAY___
+        $___OBJECT___->update();
+
+        ___CHILD_UPDATE______HAS_ADDRESS______HAS_DESCRIPTION___
+        DB::commit();
+        Cache___CLASS___::forget();
+
+        return back()->with('success', __('___CLASS___ modified successfully'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  ___CLASS___  $___OBJECT___
+     * @return Response
+     */
+    public function destroy(___CLASS___ $___OBJECT___)
+    {
+        $record = $___OBJECT___;
+        $strings = Helpers::getStringsFromRecord($record);
+        $children = Helpers::getChildrenFromModel($record);
+        $record->children = $children;
+
+        $params = [
+            'record' => $record,
+            'strings' => $strings,
+        ];
+
+        return Inertia::render('Delete', $params);
+    }
+
+    /**
+     * Delete the specified resource from storage.
+     *
+     * @param  ___CLASS___  $___OBJECT___
+     * @return Response
+     */
+    public function confirm_destroy(___CLASS___ $___OBJECT___)
+    {
+        $record = $___OBJECT___;
+        $name = class_basename($record);
+        $children = Helpers::getChildrenFromModel($record);
+
+        DB::beginTransaction();
+
+        foreach ($children as $child) {
+            foreach ($child['records'] as $child_record) {
+                $child_record->delete();
+            }
+        }
+        $record->delete();
+
+        DB::commit();
+        Cache___CLASS___::forget();
+
+        return redirect()->route('___OBJECT___.index')->with('fail', __($name . ' removed successfully.'));
+    }
+}
