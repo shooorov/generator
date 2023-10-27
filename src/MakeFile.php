@@ -10,7 +10,7 @@ class MakeFile
 {
     public static function makeCache($desk)
     {
-        $file_path = __DIR__.'/../stubs/Cache.stub';
+        $file_path = __DIR__ . '/../stubs/Cache.stub';
         $content = file_get_contents($file_path);
         $content = str_replace('___CLASS___', $desk->class, $content);
         $content = str_replace('___OBJECT___', $desk->object, $content);
@@ -120,14 +120,14 @@ class MakeFile
             $table_child_input = implode("\n                                        ", $table_child_input);
             $child_column_create_array = implode("\n                ", $child_column_create_array);
 
-            $child_table_content = file_get_contents(__DIR__.'/../stubs/Pages/ChildTable.stub');
-            $child_form_content = file_get_contents(__DIR__.'/../stubs/Pages/ChildForm.stub');
-            $child_add_remove_content = file_get_contents(__DIR__.'/../stubs/Pages/ChildAddRemove.stub');
+            $child_table_content = file_get_contents(__DIR__ . '/../stubs/Pages/ChildTable.stub');
+            $child_form_content = file_get_contents(__DIR__ . '/../stubs/Pages/ChildForm.stub');
+            $child_add_remove_content = file_get_contents(__DIR__ . '/../stubs/Pages/ChildAddRemove.stub');
         }
 
         $files = ['Create', 'Edit', 'Index', 'Show'];
         foreach ($files as $file) {
-            $content = file_get_contents(__DIR__.'/../stubs/Pages' . '/' . $file . ($desk->child_table && ($file == 'Create' || $file == 'Edit') ? '-With-Child' : '') . '.stub');
+            $content = file_get_contents(__DIR__ . '/../stubs/Pages' . '/' . $file . ($desk->child_table && ($file == 'Create' || $file == 'Edit') ? '-With-Child' : '') . '.stub');
             if ($desk->columns_in_row == 3 && ($file == 'Create' || $file == 'Edit')) {
                 $content = Str::of($content)->replaceFirst('div class="max-w-xl mx-auto', 'div class="max-w-5xl mx-auto');
             }
@@ -174,7 +174,7 @@ class MakeFile
             }
 
             $file_name = $table['class'] . '/' . $file . '.vue';
-			$dir = ($desk->directory ? ucfirst($desk->directory) . '/' : '');
+            $dir = ($desk->directory ? ucfirst($desk->directory) . '/' : '');
             $file_path = base_path("/resources/js/Pages/{$dir}{$file_name}");
             Helpers::makeFile($content, $file_path ?? public_path());
         }
@@ -217,13 +217,13 @@ class MakeFile
 
         $body_casts_array = $body_appends_array = $body_model_enums_array = null;
 
-        $content = file_get_contents(__DIR__.'/../stubs/Model.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Model.stub');
         if (count($casts_array)) {
-            $body_casts_array = file_get_contents(__DIR__.'/../stubs/Model/Casts.stub');
+            $body_casts_array = file_get_contents(__DIR__ . '/../stubs/Model/Casts.stub');
             $body_casts_array = str_replace('___MODEL_CASTS_ARRAY___', implode("\n        ", $casts_array), $body_casts_array);
         }
         if (count($appends_array)) {
-            $body_appends_array = file_get_contents(__DIR__.'/../stubs/Model/Appends.stub');
+            $body_appends_array = file_get_contents(__DIR__ . '/../stubs/Model/Appends.stub');
             $body_appends_array = str_replace('___MODEL_APPENDS_ARRAY___', implode(",\n        ", $appends_array), $body_appends_array);
         }
         if (count($model_enums_array)) {
@@ -313,7 +313,7 @@ class MakeFile
         $store_validation_columns_array = implode("\n            ", $store_validation_columns_array);
         $modify_validation_columns_array = implode("\n            ", $modify_validation_columns_array);
 
-        $content = file_get_contents(__DIR__.'/../stubs/Controller.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Controller.stub');
         $content = str_replace('___STORE_VALIDATION_ARRAY___', $store_validation_columns_array, $content);
         $content = str_replace('___MODIFY_VALIDATION_ARRAY___', $modify_validation_columns_array, $content);
         $content = str_replace('___OBJECT_STORE_COLUMNS_ARRAY___', $object_store_columns_array, $content);
@@ -350,9 +350,9 @@ class MakeFile
 
             $child_object_store_columns_array = implode("\n                    ", array_filter($child_object_store_columns_array));
 
-            $child_store = file_get_contents(__DIR__.'/../stubs/ChildStore.stub');
+            $child_store = file_get_contents(__DIR__ . '/../stubs/ChildStore.stub');
             $content = str_replace('___CHILD_STORE___', $child_store, $content);
-            $child_update = file_get_contents(__DIR__.'/../stubs/ChildUpdate.stub');
+            $child_update = file_get_contents(__DIR__ . '/../stubs/ChildUpdate.stub');
             $content = str_replace('___CHILD_UPDATE___', $child_update, $content);
 
             $content = str_replace('___CHILD_OBJECT_STORE_COLUMNS_ARRAY___', $child_object_store_columns_array, $content);
@@ -367,8 +367,8 @@ class MakeFile
         $content = str_replace('___CHILD_UPDATE___', '', $content);
 
         $file_name = $table['class'] . 'Controller.php';
-		$dir = ($desk->directory ? ucfirst($desk->directory) . '/' : '');
-		$file_path = base_path("/app/Http/Controllers/{$dir}{$file_name}");
+        $dir = ($desk->directory ? ucfirst($desk->directory) . '/' : '');
+        $file_path = base_path("/app/Http/Controllers/{$dir}{$file_name}");
         Helpers::makeFile($content, $file_path ?? public_path());
     }
 
@@ -382,7 +382,7 @@ class MakeFile
         }
         $migration_columns_array = implode("\n            ", $migration_columns_array);
 
-        $content = file_get_contents(__DIR__.'/../stubs/Migration.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Migration.stub');
         $content = str_replace('___OBJECT_PLURAL___', $table['object_plural'], $content);
         $content = str_replace('___MIGRATION_COLUMN_ARRAY___', $migration_columns_array, $content);
         $content = str_replace('___SOFT_DELETES___', $desk->has_soft_deletes ? '$table->softDeletes();' : '', $content);
@@ -405,7 +405,7 @@ class MakeFile
             'table.php',
         ]);
 
-		$file_path = base_path("/database/migrations/{$file_name}");
+        $file_path = base_path("/database/migrations/{$file_name}");
         Helpers::makeFile($content, $file_path ?? public_path());
     }
 
@@ -420,18 +420,18 @@ class MakeFile
 
         $factory_columns_array = implode("\n            ", array_filter($factory_columns_array));
 
-        $content = file_get_contents(__DIR__.'/../stubs/Factory.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Factory.stub');
         $content = str_replace('___CLASS___', $table['class'], $content);
         $content = str_replace('___FACTORY_COLUMNS_ARRAY___', $factory_columns_array, $content);
 
         $file_name = $table['class'] . 'Factory.php';
-		$file_path = base_path("/database/factories/{$file_name}");
+        $file_path = base_path("/database/factories/{$file_name}");
         Helpers::makeFile($content, $file_path ?? public_path());
 
-        $content = file_get_contents(__DIR__.'/../stubs/Seeder.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Seeder.stub');
         $content = str_replace('___CLASS___', $table['class'], $content);
         $file_name = $table['class'] . 'Seeder.php';
-		$file_path = base_path("/database/seeders/{$file_name}");
+        $file_path = base_path("/database/seeders/{$file_name}");
         Helpers::makeFile($content, $file_path ?? public_path());
     }
 
@@ -448,7 +448,7 @@ class MakeFile
         $resource_columns = array_merge($resource_columns, $desk->resource_columns);
         $resource_columns = implode(",\n            ", array_filter($resource_columns));
 
-        $content = file_get_contents(__DIR__.'/../stubs/Resource.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Resource.stub');
         $content = str_replace('___CLASS___', $table['class'], $content);
         $content = str_replace('___RESOURCE_COLUMNS_ARRAY___', $resource_columns, $content);
 
@@ -456,7 +456,7 @@ class MakeFile
         $file_path = base_path("app/Http/Resources/{$file_name}");
         Helpers::makeFile($content, $file_path ?? public_path());
 
-        $content = file_get_contents(__DIR__.'/../stubs/ResourceCollection.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/ResourceCollection.stub');
         $content = str_replace('___CLASS___', $table['class'], $content);
 
         $file_name = $table['class'] . 'Collection.php';
@@ -469,7 +469,7 @@ class MakeFile
         $table = Helpers::getStringsFromString($desk->name);
         $class_prefix = Str::of($table['object_plural'])->slug('-');
 
-        $content = file_get_contents(__DIR__.'/../stubs/Route.stub');
+        $content = file_get_contents(__DIR__ . '/../stubs/Route.stub');
         $content = str_replace('___CLASS_PREFIX___', $class_prefix, $content);
         $content = str_replace('___CLASS___', $table['class'], $content);
         $content = str_replace('___OBJECT___', $table['object'], $content);
@@ -477,7 +477,7 @@ class MakeFile
         if (file_exists(base_path('AAA/routes/web.php'))) {
             $content = file_get_contents(base_path('AAA/routes/web.php')) . $content;
         } else {
-            $content = file_get_contents(__DIR__.'/../stubs/web.stub') . $content;
+            $content = file_get_contents(__DIR__ . '/../stubs/web.stub') . $content;
         }
 
         $file_path = base_path() . "/AAA/routes/web.php";
@@ -487,5 +487,4 @@ class MakeFile
         $file_path = base_path() . "/AAA/routes/web/generator.php";
         Helpers::makeFile($content, $file_path ?? public_path());
     }
-
 }

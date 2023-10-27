@@ -2,16 +2,16 @@
 
 namespace Shooorov\Generator\Http\Controllers;
 
-use App\Helpers;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
+use Shooorov\Generator\Helpers;
 use Shooorov\Generator\Http\Resources\Desk as ResourcesDesk;
 use Shooorov\Generator\MakeFile;
 use Shooorov\Generator\Models\Desk;
 use Shooorov\Generator\Models\DeskPillar;
 use Shooorov\Generator\Models\PillarType;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 
 class DeskController extends Controller
 {
