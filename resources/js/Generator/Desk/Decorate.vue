@@ -11,6 +11,7 @@ import {
 
 import {
     CheckBadgeIcon,
+    DocumentCheckIcon,
     PencilSquareIcon,
 } from '@heroicons/vue/24/outline'
 
@@ -80,19 +81,19 @@ const submit = () => {
                     <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium"> {{ desk.name }} Desk Decorate</p>
 
                     <div class="flex-shrink-0 flex space-x-3">
-                        <Link :href="route('generator.desk.edit', desk.id)" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
+                        <Link :href="route('generator.desk.edit', desk.id)" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                             <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                             Edit
                         </Link>
 
-                        <Link v-show="desk.route" :href="desk.route?.index" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
+                        <Link v-show="desk.route" :href="desk.route?.index" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                             <ArrowTopRightOnSquareIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                            {{ desk.name }} Index
+                            To&nbsp;Index
                         </Link>
 
-                        <Link :href="route('generator.desk.generate_files', desk.id)" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
-                            <ArrowTopRightOnSquareIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                            Generate Files
+                        <Link :href="route('generator.desk.generate_files', desk.id)" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                            <DocumentCheckIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            Generate&nbsp;Files
                         </Link>
 
                         <button type="submit" @click="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">

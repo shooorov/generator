@@ -109,7 +109,7 @@ const breadcrumbs = [
 									<CogIcon class="w-6 h-6" aria-hidden="true" />
 									</Link>
 									<Link v-show="desk.route" :href="desk.route?.index"
-										class="text-primary-600 hover:text-primary-800 ml-3" :title="desk.name + ' routes'">
+										class="text-primary-600 hover:text-primary-800 ml-3" :title="'go to ' + desk.name + ' table index'">
 									<ArrowTopRightOnSquareIcon class="w-6 h-6" aria-hidden="true" />
 									</Link>
 									<Link :href="route('generator.desk.edit', desk.id)"
