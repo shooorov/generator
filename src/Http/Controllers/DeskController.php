@@ -275,19 +275,7 @@ class DeskController extends Controller
      */
     public function destroy(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
-
-        $record = $desk;
-        $strings = Helpers::getStringsFromRecord($record);
-        $children = Helpers::getChildrenFromModel($record);
-        $record->children = $children;
-
-        $params = [
-            'record' => $record,
-            'strings' => $strings,
-        ];
-
-        return Inertia::render('Delete', $params);
+        $this->confirm_destroy($request);
     }
 
     /**
@@ -302,15 +290,9 @@ class DeskController extends Controller
 
         $record = $desk;
         $name = class_basename($record);
-        $children = Helpers::getChildrenFromModel($record);
 
         DB::beginTransaction();
 
-        foreach ($children as $child) {
-            foreach ($child['records'] as $child_record) {
-                $child_record->delete();
-            }
-        }
         $record->delete();
 
         DB::commit();
