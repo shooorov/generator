@@ -1,3 +1,115 @@
+<script setup>
+import { Head, Link, usePage, useForm } from '@inertiajs/vue3'
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Combobox from '@/Components/Combobox.vue';
+
+import {
+    PlusIcon,
+    XMarkIcon,
+    ArrowTopRightOnSquareIcon
+} from '@heroicons/vue/24/solid'
+
+import {
+    CheckBadgeIcon,
+    PencilSquareIcon,
+} from '@heroicons/vue/24/outline'
+
+const page = usePage()
+
+const props = defineProps({
+    desk: Object,
+    desks: Array,
+    pillar_types: Array,
+})
+
+const getColumn = () => {
+    this.form.group_pillars.forEach(item => {
+        let split_name = item.title.toLowerCase().replace(/[^a-z ]/g, '').split(' ');
+        item.column = split_name.join('_');
+    });
+}
+
+const removePillar = (index)=> {
+    if (confirm('Are you sure you want to delete this element?')) {
+        this.form.group_pillars.splice(index, 1);
+    }
+}
+
+const addPillar = () => {
+    this.form.group_pillars.push({
+        title: null,
+        column: null,
+        unique: false,
+        default: null,
+        indexing: null,
+        filtering: null,
+        requisite: true,
+        pillar_type_id: '',
+    });
+}
+
+const dressUp = (strings) => {
+    strings = strings.split('_');
+    for(let i = 0; i < strings.length && strings[i].length > 1; i++){
+        strings[i] = strings[i].charAt(0).toUpperCase() + strings[i].slice(1);
+    }
+    return strings.join(' ');
+}
+
+const setPillar = (index)=> {
+    let selected = this.form.group_pillars[index];
+    selected.title = this.dressUp(selected.pillar_name);
+    selected.attribute = selected.pillar_name.toLowerCase();
+
+    let found_pillar = this.pillars.find(pillar => pillar.name == selected.pillar_name)
+    if(found_pillar){
+        selected.title = this.dressUp(found_pillar.name)
+        selected.attribute = found_pillar.name.toLowerCase()
+    }
+}
+
+const breadcrumbs = [
+    { name: 'Pillars', href: route('generator.pillar.index'), current: false },
+    { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
+    { name: 'Desks', href: route('generator.desk.index'), current: false },
+    { name: 'Edit Page', href: '#', current: false },
+]
+
+const form = useForm({
+    name: props.desk.name,
+    directory: props.desk.directory,
+    child_table: props.desk.child_table,
+    parent_table: props.desk.parent_table,
+
+    has_filter: props.desk.has_filter,
+    has_opening: props.desk.has_opening,
+    columns_in_row: props.desk.columns_in_row,
+    has_polymorphic: props.desk.has_polymorphic,
+    has_description: props.desk.has_description,
+    has_remark: props.desk.has_remark,
+    has_has_soft_deletes: props.desk.has_has_soft_deletes,
+
+    group_pillars: props.desk.group_pillars.length? props.desk.group_pillars : [{
+        title: null,
+        table_id: null,
+        column: null,
+        unique: false,
+        default: null,
+        indexing: null,
+        filtering: null,
+        requisite: true,
+        pillar_type_id: null,
+    }],
+})
+
+const submit = () => {
+    form.patch(route('generator.desk.update', props.desk.id), {
+        onFinish: () => {
+        }
+    });
+}
+</script>
+
 <template>
     <Head title="Edit Desk"></Head>
 
@@ -20,7 +132,7 @@
     <div class="max-w-full mx-auto py-5 sm:px-6 lg:px-8">
         <div class="bg-white shadow sm:rounded-lg">
             <div class="flex justify-between px-4 py-5 border-b border-gray-200 sm:px-6">
-                <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium"> {{ desk.name }} Edit</p>
+                <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium"> {{ desk.name }} Desk Edit</p>
 
                 <div class="flex-shrink-0 flex space-x-3">
                     <Link :href="route('generator.desk.decorate', desk.id)" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
@@ -30,7 +142,7 @@
 
                     <Link v-show="desk.route" :href="desk.route?.index" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
                         <ArrowTopRightOnSquareIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                        Open
+                        {{ desk.name }} Index
                     </Link>
 
                     <Link :href="route('generator.desk.generate_files', desk.id)" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
@@ -39,7 +151,7 @@
                     </Link>
 
                     <button type="submit" @click="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                        <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                        <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                         Update
                     </button>
                 </div>
@@ -63,7 +175,7 @@
                         </div>
 
                         <div class="py-2 sm:grid sm:grid-cols-4 sm:gap-2">
-                            <dt class="text-sm leading-10 font-semibold text-gray-700 tracking-wider text-right pr-8"> Name <span class="text-red-500">*</span> </dt>
+                            <dt class="text-sm leading-10 font-semibold text-gray-700 tracking-wider text-right pr-8"> Desk Name <span class="text-red-500">*</span> </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-1">
                                 <input v-model="form.name" placeholder="Name" type="text" class="block w-full px-4 focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded">
                             </dd>
@@ -224,7 +336,7 @@
                     <div class="max-w-xl mx-auto">
                         <div class="flex justify-end">
                             <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                                <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                 Update
                             </button>
                         </div>
@@ -234,144 +346,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { reactive } from 'vue'
-import { router, Head, Link } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
-import Combobox from '@/Components/Combobox.vue';
-
-import {
-    PlusIcon,
-    XMarkIcon,
-    ArrowTopRightOnSquareIcon
-} from '@heroicons/vue/24/solid'
-
-import {
-    PencilSquareIcon,
-} from '@heroicons/vue/24/outline'
-
-export default {
-    components: {
-        Breadcrumb,
-        Head,
-        Combobox,
-        Link,
-
-        ArrowTopRightOnSquareIcon,
-        PlusIcon,
-        PencilSquareIcon,
-        XMarkIcon,
-
-    },
-
-    props:{
-        errors: Object,
-        alertMessage: Object,
-
-        desk: Object,
-        desks: Array,
-        pillar_types: Array,
-    },
-
-    watch: {
-        'form.pillar_type_id'() {
-
-        }
-    },
-
-    methods: {
-        getColumn() {
-            this.form.group_pillars.forEach(item => {
-                let split_name = item.title.toLowerCase().replace(/[^a-z ]/g, '').split(' ');
-                item.column = split_name.join('_');
-            });
-        },
-
-        removePillar(index){
-            if (confirm('Are you sure you want to delete this element?')) {
-                this.form.group_pillars.splice(index, 1);
-            }
-        },
-
-        addPillar(){
-            this.form.group_pillars.push({
-                title: null,
-                column: null,
-                unique: false,
-                default: null,
-                indexing: null,
-                filtering: null,
-                requisite: true,
-                pillar_type_id: '',
-            });
-        },
-
-        dressUp(strings) {
-            strings = strings.split('_');
-            for(let i = 0; i < strings.length && strings[i].length > 1; i++){
-                strings[i] = strings[i].charAt(0).toUpperCase() + strings[i].slice(1);
-            }
-            return strings.join(' ');
-        },
-
-        setPillar(index){
-            let selected = this.form.group_pillars[index];
-            selected.title = this.dressUp(selected.pillar_name);
-            selected.attribute = selected.pillar_name.toLowerCase();
-
-            let found_pillar = this.pillars.find(pillar => pillar.name == selected.pillar_name)
-            if(found_pillar){
-                selected.title = this.dressUp(found_pillar.name)
-                selected.attribute = found_pillar.name.toLowerCase()
-            }
-        }
-    },
-
-    setup (props) {
-        const breadcrumbs = [
-            { name: 'Pillars', href: route('generator.pillar.index'), current: false },
-            { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
-            { name: 'Desks', href: route('generator.desk.index'), current: false },
-            { name: 'Edit Page', href: '#', current: false },
-        ]
-
-        const form = reactive({
-            name: props.desk.name,
-            directory: props.desk.directory,
-            child_table: props.desk.child_table,
-            parent_table: props.desk.parent_table,
-
-            has_filter: props.desk.has_filter,
-            has_opening: props.desk.has_opening,
-            columns_in_row: props.desk.columns_in_row,
-            has_polymorphic: props.desk.has_polymorphic,
-            has_description: props.desk.has_description,
-            has_remark: props.desk.has_remark,
-            has_has_soft_deletes: props.desk.has_has_soft_deletes,
-
-            group_pillars: props.desk.group_pillars.length? props.desk.group_pillars : [{
-                title: null,
-                table_id: null,
-                column: null,
-                unique: false,
-                default: null,
-                indexing: null,
-                filtering: null,
-                requisite: true,
-                pillar_type_id: null,
-            }],
-        })
-
-        function submit() {
-            router.patch(route('generator.desk.update', props.desk.id), form)
-        }
-
-        return {
-            breadcrumbs,
-            form,
-            submit
-        }
-    },
-}
-</script>

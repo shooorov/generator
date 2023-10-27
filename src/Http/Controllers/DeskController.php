@@ -79,7 +79,7 @@ class DeskController extends Controller
 
         DB::commit();
 
-        return redirect()->route('desk.edit', $desk->id)->with('success', __('Desk added successfully'));
+        return redirect()->route('generator.desk.edit', $desk->id)->with('success', __('Desk added successfully'));
     }
 
     /**
@@ -315,6 +315,6 @@ class DeskController extends Controller
 
         DB::commit();
 
-        return redirect()->route('desk.index')->with('fail', __($name . ' removed successfully.'));
+        return redirect()->route('generator.desk.index')->with('fail', __($name . ' removed successfully.'));
     }
 }

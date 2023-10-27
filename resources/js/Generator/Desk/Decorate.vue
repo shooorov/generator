@@ -1,3 +1,59 @@
+<script setup>
+import { Head, Link, usePage, useForm } from '@inertiajs/vue3'
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Combobox from '@/Components/Combobox.vue';
+
+import {
+    ArrowTopRightOnSquareIcon,
+    PlusIcon,
+    XMarkIcon,
+} from '@heroicons/vue/24/solid'
+
+import {
+    CheckBadgeIcon,
+    PencilSquareIcon,
+} from '@heroicons/vue/24/outline'
+
+const page = usePage()
+
+const props = defineProps({
+    desk: Object,
+    pillar_types: Array,
+})
+
+const breadcrumbs = [
+    { name: 'Pillars', href: route('generator.pillar.index'), current: false },
+    { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
+    { name: 'Desks', href: route('generator.desk.index'), current: false },
+    { name: 'Decorate Page', href: '#', current: false },
+]
+
+const form = useForm({
+    has_filter: props.desk.has_filter,
+    has_opening: props.desk.has_opening,
+    has_polymorphic: props.desk.has_polymorphic,
+    has_description: props.desk.has_description,
+    has_remark: props.desk.has_remark,
+    has_soft_deletes: props.desk.has_soft_deletes,
+
+    generate_cache: props.desk.generate_cache,
+    generate_pages: props.desk.generate_pages,
+    generate_model: props.desk.generate_model,
+    generate_seeder: props.desk.generate_seeder,
+    generate_migration: props.desk.generate_migration,
+    generate_resources: props.desk.generate_resources,
+    generate_controller: props.desk.generate_controller,
+
+    group_pillars: props.desk.group_pillars
+})
+
+const submit = () => {
+    form.patch(route('generator.desk.decoration', props.desk.id), {
+        onFinish: () => {
+        }
+    });
+}
+</script>
 <template>
     <Head title="Decorate Desk"></Head>
 
@@ -21,7 +77,7 @@
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow sm:rounded-lg">
                 <div class="flex justify-between px-4 py-5 border-b border-gray-200 sm:px-6">
-                    <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium"> {{ desk.name }} Decorate</p>
+                    <p class="max-w-2xl leading-10 text-gray-700 text-lg font-medium"> {{ desk.name }} Desk Decorate</p>
 
                     <div class="flex-shrink-0 flex space-x-3">
                         <Link :href="route('generator.desk.edit', desk.id)" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
@@ -31,7 +87,7 @@
 
                         <Link v-show="desk.route" :href="desk.route?.index" class="inline-flex items-center px-4 py-2 border border-primary-300 shadow-sm text-sm font-medium rounded-md text-primary-500 hover:text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-primary-500">
                             <ArrowTopRightOnSquareIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                            Open
+                            {{ desk.name }} Index
                         </Link>
 
                         <Link :href="route('generator.desk.generate_files', desk.id)" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
@@ -40,7 +96,7 @@
                         </Link>
 
                         <button type="submit" @click="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                            <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                            <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                             Update
                         </button>
                     </div>
@@ -187,7 +243,7 @@
                         <div class="max-w-xl mx-auto">
                             <div class="flex justify-end">
                                 <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                    <PencilSquareIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                                    <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                     Update
                                 </button>
                             </div>
@@ -198,82 +254,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { reactive } from 'vue'
-import { router, Head, Link } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
-import Combobox from '@/Components/Combobox.vue';
-
-import {
-    ArrowTopRightOnSquareIcon,
-    PlusIcon,
-    XMarkIcon,
-} from '@heroicons/vue/24/solid'
-
-import {
-    PencilSquareIcon,
-} from '@heroicons/vue/24/outline'
-
-export default {
-    components: {
-        Breadcrumb,
-        Head,
-        Combobox,
-        Link,
-
-        ArrowTopRightOnSquareIcon,
-        PlusIcon,
-        PencilSquareIcon,
-        XMarkIcon,
-
-    },
-
-    props:{
-        errors: Object,
-        alertMessage: Object,
-
-        desk: Object,
-        pillar_types: Array,
-    },
-
-    setup (props) {
-        const breadcrumbs = [
-            { name: 'Pillars', href: route('generator.pillar.index'), current: false },
-            { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
-            { name: 'Desks', href: route('generator.desk.index'), current: false },
-            { name: 'Decorate Page', href: '#', current: false },
-        ]
-
-        const form = reactive({
-            has_filter: props.desk.has_filter,
-            has_opening: props.desk.has_opening,
-            has_polymorphic: props.desk.has_polymorphic,
-            has_description: props.desk.has_description,
-            has_remark: props.desk.has_remark,
-            has_soft_deletes: props.desk.has_soft_deletes,
-
-            generate_cache: props.desk.generate_cache,
-            generate_pages: props.desk.generate_pages,
-            generate_model: props.desk.generate_model,
-            generate_seeder: props.desk.generate_seeder,
-            generate_migration: props.desk.generate_migration,
-            generate_resources: props.desk.generate_resources,
-            generate_controller: props.desk.generate_controller,
-
-            group_pillars: props.desk.group_pillars
-        })
-
-        function submit() {
-            router.patch(route('generator.desk.decoration', props.desk.id), form)
-        }
-
-        return {
-            breadcrumbs,
-
-            form,
-            submit
-        }
-    },
-}
-</script>

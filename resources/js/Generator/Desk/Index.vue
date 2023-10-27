@@ -1,3 +1,44 @@
+<script setup>
+import { onMounted } from 'vue';
+import { router, Head, Link, usePage, useForm } from '@inertiajs/vue3'
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import { PlusIcon } from '@heroicons/vue/24/solid'
+import {
+	DocumentDuplicateIcon,
+	ArrowTopRightOnSquareIcon,
+	PencilSquareIcon,
+	CogIcon,
+	TrashIcon,
+} from '@heroicons/vue/24/outline'
+
+const page = usePage()
+
+const props = defineProps({
+    desks: Array,
+})
+
+onMounted(() => {
+    $('#table').DataTable({
+        lengthMenu: [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
+        length: 10,
+        dom: "<'flex justify-center sm:justify-end mb-3'><'flex flex-col sm:flex-row justify-between'lf><'block overflow-auto'rt><'flex flex-col sm:flex-row justify-between'ip>",
+    });
+})
+
+const deleteRecord = (record_id) => {
+    if (confirm("Do you really want to delete this desk?")) {
+        router.get(route('generator.desk.destroy', record_id));
+    }
+}
+
+const breadcrumbs = [
+    { name: 'Pillars', href: route('generator.pillar.index'), current: false },
+    { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
+    { name: 'Desks', href: route('generator.desk.index'), current: false },
+    { name: 'List Page', href: '#', current: false },
+];
+</script>
+
 <template>
 	<Head title="Desks"></Head>
 
@@ -75,7 +116,7 @@
 										class="text-indigo-600 hover:text-indigo-800 ml-3" title="edit">
 									<PencilSquareIcon class="w-6 h-6" aria-hidden="true" />
 									</Link>
-									<Link :href="route('generator.desk.destroy', desk.id)"
+									<Link @click="deleteRecord(desk.id)"
 										class="text-red-600 hover:text-red-800 ml-3" title="destroy">
 									<TrashIcon class="w-6 h-6" aria-hidden="true" />
 									</Link>
@@ -88,66 +129,3 @@
 		</div>
 	</div>
 </template>
-
-<script>
-import { router, Head, Link } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
-import { PlusIcon } from '@heroicons/vue/24/solid'
-import {
-	DocumentDuplicateIcon,
-	ArrowTopRightOnSquareIcon,
-	PencilSquareIcon,
-	CogIcon,
-	TrashIcon,
-} from '@heroicons/vue/24/outline'
-
-export default {
-	components: {
-		Breadcrumb,
-		Head,
-		Link,
-		DocumentDuplicateIcon,
-		ArrowTopRightOnSquareIcon,
-		PencilSquareIcon,
-		PlusIcon,
-		CogIcon,
-		TrashIcon,
-	},
-
-	props: {
-		desks: Array,
-		errors: Object,
-		alertMessage: Object,
-	},
-
-	mounted() {
-		$('#table').DataTable({
-			lengthMenu: [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
-			length: 10,
-			dom: "<'flex justify-center sm:justify-end mb-3'><'flex flex-col sm:flex-row justify-between'lf><'block overflow-auto'rt><'flex flex-col sm:flex-row justify-between'ip>",
-		});
-	},
-
-	methods: {
-		deleteRecord(record_id) {
-			if (confirm("Do you really want to delete this desk?")) {
-				router.get(route('generator.desk.destroy', record_id));
-			}
-		}
-	},
-
-	setup(props) {
-		const breadcrumbs = [
-			{ name: 'Pillars', href: route('generator.pillar.index'), current: false },
-			{ name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
-			{ name: 'Desks', href: route('generator.desk.index'), current: false },
-			{ name: 'List Page', href: '#', current: false },
-		];
-
-		return {
-			breadcrumbs,
-		}
-	},
-
-}
-</script>
