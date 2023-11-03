@@ -82,7 +82,7 @@ class PillarTypeController extends Controller
      */
     public function show(Request $request)
     {
-		$pillar_type = PillarType::findOrFail($request->pillar_type);
+        $pillar_type = PillarType::findOrFail($request->pillar_type);
 
         $params = [
             'pillar_type' => $pillar_type,
@@ -99,7 +99,7 @@ class PillarTypeController extends Controller
      */
     public function edit(Request $request)
     {
-		$pillar_type = PillarType::findOrFail($request->pillar_type);
+        $pillar_type = PillarType::findOrFail($request->pillar_type);
 
         $params = [
             'pillar_type' => $pillar_type,
@@ -117,7 +117,7 @@ class PillarTypeController extends Controller
      */
     public function update(Request $request)
     {
-		$pillar_type = PillarType::findOrFail($request->pillar_type);
+        $pillar_type = PillarType::findOrFail($request->pillar_type);
 
         $request->validate([
             'name' => ['required', 'string', 'max:191'],
@@ -145,7 +145,7 @@ class PillarTypeController extends Controller
 
         DB::commit();
 
-        return back()->with('success', __('PillarType modified successfully'));
+        return redirect()->route('generator.pillar_type.edit', $object->id)->with('success', __('PillarType modified successfully'));
     }
 
     /**
@@ -156,7 +156,7 @@ class PillarTypeController extends Controller
      */
     public function destroy(Request $request)
     {
-		$pillar_type = PillarType::findOrFail($request->pillar_type);
+        $pillar_type = PillarType::findOrFail($request->pillar_type);
 
         $record = $pillar_type;
         $strings = Helpers::getStringsFromRecord($record);
@@ -179,7 +179,7 @@ class PillarTypeController extends Controller
      */
     public function confirm_destroy(Request $request)
     {
-		$pillar_type = PillarType::findOrFail($request->pillar_type);
+        $pillar_type = PillarType::findOrFail($request->pillar_type);
 
         $record = $pillar_type;
         $name = class_basename($record);

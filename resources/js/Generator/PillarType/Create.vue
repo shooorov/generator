@@ -1,3 +1,80 @@
+<script setup>
+import { onMounted, ref } from 'vue';
+import { Head, useForm, usePage } from '@inertiajs/vue3'
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Combobox from '@/Components/Combobox.vue';
+
+import {
+    PlusIcon,
+} from '@heroicons/vue/24/solid'
+
+const page = usePage()
+
+const props = defineProps({
+    pillar_types: Array,
+})
+
+const migration = ref('')
+const validation = ref('')
+
+onMounted(() => {
+    demoBody()
+})
+
+const breadcrumbs = [
+    { name: 'Desks', href: route('generator.desk.index'), current: false },
+    { name: 'Pillars', href: route('generator.pillar.index'), current: false },
+    { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
+    { name: 'Create Page', href: '#', current: false },
+]
+
+const demoBody = () => {
+    migration = [ "'amount'" ];
+    let migration_length = this.form.full_n_float_length;
+    if(migration_length){
+        migration_length = migration_length.split(",");
+        migration = migration.concat(migration_length);
+    }
+    migration = migration.filter(function (str){
+        str = str.replace(/ +(?= )/g,'').trim();
+        return str != null && str != '';
+    });
+    migration = migration.join(', ');
+
+    validation = [ 'required' ];
+    validation = validation.concat(this.form.validate);
+
+    let validation_length = this.form.max_n_min_length;
+    if(validation_length){
+        validation_length = validation_length.split(",");
+        validation = validation.concat(validation_length);
+    }
+    validation = validation.filter(function (str){
+        str = str.replace(/ +(?= )/g,'').trim();
+        return str != null && str != '';
+    });
+    validation = validation.map(function (str){
+        return '\'' + str + '\'';
+    });
+    validation = validation.join(', ');
+}
+
+const form = useForm({
+    name: null,
+    mimes: null,
+    guide: null,
+    validate: '',
+    max_n_min_length: null,
+    full_n_float_length: null,
+})
+
+const submit = () => {
+    form.post(route('generator.pillar_type.store'), {
+        onFinish: () => {
+        }
+    });
+}
+</script>
 <template>
     <Head title="Create Pillar type"></Head>
 
@@ -83,107 +160,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { reactive } from 'vue'
-import { router, Head, Link } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
-import Combobox from '@/Components/Combobox.vue';
-
-import {
-    PlusIcon,
-} from '@heroicons/vue/24/solid'
-
-import {
-    PencilSquareIcon,
-} from '@heroicons/vue/24/outline'
-
-export default {
-    components: {
-        Breadcrumb,
-        Head,
-        Combobox,
-        Link,
-
-        PlusIcon,
-        PencilSquareIcon,
-    },
-
-    props:{
-        errors: Object,
-        alertMessage: Object,
-    },
-
-    data() {
-        return {
-            migration: '',
-            validation: '',
-        }
-    },
-
-    methods: {
-        demoBody(){
-            let migration = [ "'amount'" ];
-            let migration_length = this.form.full_n_float_length;
-            if(migration_length){
-                migration_length = migration_length.split(",");
-                migration = migration.concat(migration_length);
-            }
-            migration = migration.filter(function (str){
-                str = str.replace(/ +(?= )/g,'').trim();
-                return str != null && str != '';
-            });
-            this.migration = migration.join(', ');
-
-            let validation = [ 'required' ];
-            validation = validation.concat(this.form.validate);
-
-            let validation_length = this.form.max_n_min_length;
-            if(validation_length){
-                validation_length = validation_length.split(",");
-                validation = validation.concat(validation_length);
-            }
-            validation = validation.filter(function (str){
-                str = str.replace(/ +(?= )/g,'').trim();
-                return str != null && str != '';
-            });
-            validation = validation.map(function (str){
-                return '\'' + str + '\'';
-            });
-            this.validation = validation.join(', ');
-        }
-    },
-
-    mounted() {
-        this.demoBody();
-    },
-
-    setup () {
-        const breadcrumbs = [
-            { name: 'Desks', href: route('generator.desk.index'), current: false },
-            { name: 'Pillars', href: route('generator.pillar.index'), current: false },
-            { name: 'Pillar Types', href: route('generator.pillar_type.index'), current: false },
-            { name: 'Create Page', href: '#', current: false },
-        ]
-
-        const form = reactive({
-            name: null,
-            mimes: null,
-            guide: null,
-            validate: '',
-            max_n_min_length: null,
-            full_n_float_length: null,
-        })
-
-        function submit() {
-            router.post(route('generator.pillar_type.store'), form);
-        }
-
-        return {
-            breadcrumbs,
-            form,
-            submit
-        }
-    }
-}
-</script>

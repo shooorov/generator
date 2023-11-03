@@ -1,3 +1,63 @@
+<script setup>
+import { reactive } from 'vue'
+import { Head, useForm, usePage } from '@inertiajs/vue3'
+import {
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems
+} from '@headlessui/vue'
+
+import Alert from '@/Components/Alert.vue';
+import AppLayout from '@/Layouts/Authenticated.vue';
+import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Combobox from '@/Components/Combobox.vue';
+import InputError from '@/Components/InputError.vue';
+import ModelOptions from '@/Components/ModelOptions.vue';
+
+import {
+    PlusIcon,
+} from '@heroicons/vue/24/solid'
+
+const page = usePage()
+
+const props = defineProps({
+    errors: Object,
+    alertMessage: Object,
+    string_change: Object,
+
+    ___PARAMS_ARRAY___
+})
+
+const breadcrumbs = [
+    { name: ___PROPS_ON___.string_change.___OBJECT____plural?? '___NAME_PLURAL___', href: route('___OBJECT___.index'), current: false },
+    { name: 'Create Page', href: '#', current: false },
+]
+
+const form = useForm({
+    ___FORM_COLUMN_CREATE_ARRAY___
+})
+
+const submit = () => {
+    form.post(route('___OBJECT___.store'))
+}
+
+export default {
+    layout: AppLayout,
+
+    props: {
+        errors: Object,
+        alertMessage: Object,
+        string_change: Object,
+
+        ___PARAMS_ARRAY___
+    },
+
+    setup (___PROPS_ON___) {
+
+    }
+}
+</script>
 <template>
     <Head><title> Create {{ string_change.___OBJECT____singular?? '___NAME_SINGULAR___' }} </title></Head>
 
@@ -54,9 +114,7 @@ ___FORM_INPUT_FIELD___
             </div>
         </div>
     </AppLayout>
-
 </template>
-
 <script>
 import { reactive } from 'vue'
 import { router, Head, Link } from '@inertiajs/vue3'

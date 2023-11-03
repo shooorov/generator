@@ -49,7 +49,7 @@ const form = useForm({
 })
 
 const submit = () => {
-    form.patch(route('generator.desk.decoration', props.desk.id), {
+    form.post(route('generator.desk.decoration', props.desk.id), {
         onFinish: () => {
         }
     });

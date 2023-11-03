@@ -27,7 +27,7 @@ class DeskController extends Controller
             'desks' => count($desks) ? ResourcesDesk::collection($desks) : [],
         ];
 
-		return Inertia::render('vendor/Generator/Desk/Index', $params);
+        return Inertia::render('vendor/Generator/Desk/Index', $params);
     }
 
     /**
@@ -90,9 +90,9 @@ class DeskController extends Controller
      */
     public function show(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
-		$params = [
+        $params = [
             'desk' => new ResourcesDesk($desk),
         ];
 
@@ -107,7 +107,7 @@ class DeskController extends Controller
      */
     public function edit(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
         $params = [
             'desk' => new ResourcesDesk($desk),
@@ -127,7 +127,7 @@ class DeskController extends Controller
      */
     public function update(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
         $request->validate([
             'name' => ['required', 'string', 'max:191'],
@@ -185,7 +185,7 @@ class DeskController extends Controller
 
         DB::commit();
 
-        return back()->with('success', __('Desk modified successfully'));
+        return redirect()->route('generator.desk.edit', $object->id)->with('success', __('Desk modified successfully'));
     }
 
     /**
@@ -196,7 +196,7 @@ class DeskController extends Controller
      */
     public function decorate(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
         $params = [
             'desk' => new ResourcesDesk($desk),
@@ -214,7 +214,7 @@ class DeskController extends Controller
      */
     public function decoration(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
         DB::beginTransaction();
 
@@ -286,7 +286,7 @@ class DeskController extends Controller
      */
     public function confirm_destroy(Request $request)
     {
-		$desk = Desk::findOrFail($request->desk);
+        $desk = Desk::findOrFail($request->desk);
 
         $record = $desk;
         $name = class_basename($record);

@@ -24,7 +24,7 @@ const props = defineProps({
 })
 
 const getColumn = () => {
-    this.form.group_pillars.forEach(item => {
+    form.group_pillars.forEach(item => {
         let split_name = item.title.toLowerCase().replace(/[^a-z ]/g, '').split(' ');
         item.column = split_name.join('_');
     });
@@ -32,12 +32,12 @@ const getColumn = () => {
 
 const removePillar = (index)=> {
     if (confirm('Are you sure you want to delete this element?')) {
-        this.form.group_pillars.splice(index, 1);
+        form.group_pillars.splice(index, 1);
     }
 }
 
 const addPillar = () => {
-    this.form.group_pillars.push({
+    form.group_pillars.push({
         title: null,
         column: null,
         unique: false,
@@ -58,13 +58,13 @@ const dressUp = (strings) => {
 }
 
 const setPillar = (index)=> {
-    let selected = this.form.group_pillars[index];
-    selected.title = this.dressUp(selected.pillar_name);
+    let selected = form.group_pillars[index];
+    selected.title = dressUp(selected.pillar_name);
     selected.attribute = selected.pillar_name.toLowerCase();
 
-    let found_pillar = this.pillars.find(pillar => pillar.name == selected.pillar_name)
+    let found_pillar = pillar_types.find(item => item.name == selected.pillar_name)
     if(found_pillar){
-        selected.title = this.dressUp(found_pillar.name)
+        selected.title = dressUp(found_pillar.name)
         selected.attribute = found_pillar.name.toLowerCase()
     }
 }
@@ -104,7 +104,7 @@ const form = useForm({
 })
 
 const submit = () => {
-    form.patch(route('generator.desk.update', props.desk.id), {
+    form.post(route('generator.desk.update', props.desk.id), {
         onFinish: () => {
         }
     });
@@ -257,7 +257,7 @@ const submit = () => {
                                     <th colspan="2" scope="col" class="w-10 p-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Index</th>
                                     <th rowspan="2" scope="col" class="w-10 p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unique</th>
                                     <th rowspan="2" scope="col" class="w-80 p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Default</th>
-                                    <th rowspan="2" scope="col" class="w-16 p-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Required</th>
+                                    <th rowspan="2" scope="col" class="w-16 p-2 text-left text-5xl font-medium text-gray-500 uppercase tracking-wider"><!-- Required --><span class="text-red-500">*</span></th>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="w-10 p-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Filtering</th>
@@ -271,7 +271,7 @@ const submit = () => {
                                         <Combobox v-model="group_pillar.pillar_type_id" :items="pillar_types.map((item) => { return { id: item.id, name: item.name?? item.title } })" class="w-full" />
                                     </td>
 
-                                    <td :colspan="group_pillar.pillar_type_id == 10? 1 : 2">
+                                    <td :colspan="group_pillar.pillar_type_id == pillar_types.find(i => i.name == 'foreignId')?.id ? 1 : 2">
                                         <input v-model="group_pillar.title" @keyup="getColumn()" placeholder="Title" type="text" :title="'column: ' + group_pillar.column" class="block w-full px-2 focus:ring-none focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded" />
                                     </td>
 

@@ -38,7 +38,6 @@ const breadcrumbs = [
     { name: 'List Page', href: '#', current: false },
 ];
 </script>
-
 <template>
 	<Head title="Desks"></Head>
 
@@ -50,10 +49,9 @@ const breadcrumbs = [
 				</div>
 
 				<div class="mt-6 h-9 flex space-x-3 md:mt-0 md:ml-4">
-					<Link :href="route('generator.desk.create')"
-						class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
-					<PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-					Create
+					<Link :href="route('generator.desk.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
+                        <PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                        Create
 					</Link>
 				</div>
 			</div>
