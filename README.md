@@ -3,7 +3,7 @@ Fast and easy way to create base files
 
 # Requirements
 - laravel 10
-- php 8.1
+- php 8.0
 - inertiajs
 - vuejs
 
