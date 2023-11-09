@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Breadcrumb from '../Components/Breadcrumb.vue';
 
 import {
     PlusIcon,
@@ -33,32 +33,32 @@ const breadcrumbs = [
 ]
 
 const demoBody = () => {
-    migration = [ "'amount'" ];
+    migration.value = [ "'amount'" ];
     let migration_length = this.form.full_n_float_length;
     if(migration_length){
         migration_length = migration_length.split(",");
-        migration = migration.concat(migration_length);
+        migration.value = migration.value.concat(migration_length);
     }
-    migration = migration.filter(function (str){
+    migration.value = migration.value.filter(function (str){
         str = str.replace(/ +(?= )/g,'').trim();
         return str != null && str != '';
     });
-    migration = migration.join(', ');
+    migration.value = migration.value.join(', ');
 
-    validation = [ 'required', this.form.validate ];
+    validation.value = [ 'required', this.form.validate ];
     let validation_length = this.form.max_n_min_length;
     if(validation_length){
         validation_length = validation_length.split(",");
-        validation = validation.concat(validation_length);
+        validation.value = validation.value.concat(validation_length);
     }
-    validation = validation.filter(function (str){
+    validation.value = validation.value.filter(function (str){
         str = str.replace(/ +(?= )/g,'').trim();
         return str != null && str != '';
     });
-    validation = validation.map(function (str){
+    validation.value = validation.value.map(function (str){
         return '\'' + str + '\'';
     });
-    validation = validation.join(', ');
+    validation.value = validation.value.join(', ');
 }
 
 const form = useForm({

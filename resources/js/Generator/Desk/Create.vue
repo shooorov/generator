@@ -1,6 +1,6 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Breadcrumb from '../Components/Breadcrumb.vue';
 
 import {
     PlusIcon,

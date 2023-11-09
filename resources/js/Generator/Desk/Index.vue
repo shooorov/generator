@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { router, Head, Link, usePage, useForm } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
+import Breadcrumb from '../Components/Breadcrumb.vue';
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import {
 	DocumentDuplicateIcon,

@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link, usePage, useForm } from '@inertiajs/vue3'
-import Breadcrumb from '@/Components/Breadcrumb.vue';
-import Combobox from '@/Components/Combobox.vue';
+import Breadcrumb from '../Components/Breadcrumb.vue';
+import Combobox from '../Components/Combobox.vue';
 
 import {
     PlusIcon,
