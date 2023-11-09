@@ -12,3 +12,10 @@ Add generator into your project
 ```
 composer require shooorov/generator --dev
 ```
+
+
+Add generator into your git repo as submodule for development
+
+```
+git submodule add https://github.com/shooorov/generator
+```
