@@ -20,7 +20,7 @@ const page = usePage()
 const props = defineProps({
     desk: Object,
     desks: Object,
-    pillar_types: Object,
+    pillar_types: Array,
 })
 
 const getColumn = () => {
@@ -62,7 +62,7 @@ const setPillar = (index)=> {
     selected.title = dressUp(selected.pillar_name);
     selected.attribute = selected.pillar_name.toLowerCase();
 
-    let found_pillar = pillar_types.data.find(item => item.name == selected.pillar_name)
+    let found_pillar = pillar_types.find(item => item.name == selected.pillar_name)
     if(found_pillar){
         selected.title = dressUp(found_pillar.name)
         selected.attribute = found_pillar.name.toLowerCase()
@@ -268,15 +268,15 @@ const submit = () => {
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr v-for="(group_pillar, index) in form.group_pillars" :key="index">
                                     <td>
-                                        <!-- <Combobox v-model="group_pillar.pillar_type_id" :items="pillar_types.data.map((item) => { return { id: item.id, name: item.name?? item.title } })" class="w-full" /> -->
+                                        <Combobox v-model="group_pillar.pillar_type_id" :items="pillar_types.map((item) => { return { id: item.id, name: item.name?? item.title } })" class="w-full" />
                                     </td>
 
-                                    <!-- <td :colspan="group_pillar.pillar_type_id == pillar_types.data.find(i => i.name == 'foreignId')?.id ? 1 : 2">
+                                    <td :colspan="group_pillar.pillar_type_id == pillar_types.find(i => i.name == 'foreignId')?.id ? 1 : 2">
                                         <input v-model="group_pillar.title" @keyup="getColumn()" placeholder="Title" type="text" :title="'column: ' + group_pillar.column" class="block w-full px-2 focus:ring-none focus:ring-gray-400 focus:border-gray-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded" />
-                                    </td> -->
+                                    </td>
 
                                     <td v-if="group_pillar.pillar_type_id == 10">
-                                        <!-- <Combobox v-model="group_pillar.table_id" :items="desks.data.map((item) => { return { id: item.id, name: item.name?? item.title } })" class="w-full" /> -->
+                                        <Combobox v-model="group_pillar.table_id" :items="desks.data.map((item) => { return { id: item.id, name: item.name?? item.title } })" class="w-full" />
                                     </td>
 
                                     <!-- <td>

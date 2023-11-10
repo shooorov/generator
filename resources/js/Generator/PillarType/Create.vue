@@ -2,17 +2,12 @@
 import { onMounted, ref } from 'vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3'
 import Breadcrumb from '../Components/Breadcrumb.vue';
-import Combobox from '../Components/Combobox.vue';
 
 import {
     PlusIcon,
 } from '@heroicons/vue/24/solid'
 
 const page = usePage()
-
-const props = defineProps({
-    pillar_types: Array,
-})
 
 const migration = ref('')
 const validation = ref('')

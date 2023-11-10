@@ -14,9 +14,8 @@ import {
 const page = usePage()
 
 const props = defineProps({
-    pillar_type: Object,
-    pillar_type_types: Array}
-)
+    pillar_type: Object
+})
 
 const migration = ref('')
 const validation = ref('')
