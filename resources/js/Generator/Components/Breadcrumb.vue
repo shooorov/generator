@@ -3,7 +3,7 @@
         <ol role="list" class="flex items-center space-x-4">
         <li>
             <div>
-                <Link href="/dashboard" class="text-gray-400 hover:text-gray-500">
+                <Link href="/generator" class="text-gray-400 hover:text-gray-500">
                     <HomeIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                     <span class="sr-only">Home</span>
                 </Link>

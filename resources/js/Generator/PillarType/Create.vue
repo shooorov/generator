@@ -21,6 +21,15 @@ onMounted(() => {
     demoBody()
 })
 
+const form = useForm({
+    name: null,
+    mimes: null,
+    guide: null,
+    validate: '',
+    max_n_min_length: null,
+    full_n_float_length: null,
+})
+
 const breadcrumbs = [
     { name: 'Desks', href: route('generator.desk.index'), current: false },
     { name: 'Pillars', href: route('generator.pillar.index'), current: false },
@@ -30,7 +39,7 @@ const breadcrumbs = [
 
 const demoBody = () => {
     migration.value = [ "'amount'" ];
-    let migration_length = this.form.full_n_float_length;
+    let migration_length = form.full_n_float_length;
     if(migration_length){
         migration_length = migration_length.split(",");
         migration.value = migration.value.concat(migration_length);
@@ -42,9 +51,9 @@ const demoBody = () => {
     migration.value = migration.value.join(', ');
 
     validation.value = [ 'required' ];
-    validation.value = validation.value.concat(this.form.validate);
+    validation.value = validation.value.concat(form.validate);
 
-    let validation_length = this.form.max_n_min_length;
+    let validation_length = form.max_n_min_length;
     if(validation_length){
         validation_length = validation_length.split(",");
         validation.value = validation.value.concat(validation_length);
@@ -58,15 +67,6 @@ const demoBody = () => {
     });
     validation.value = validation.value.join(', ');
 }
-
-const form = useForm({
-    name: null,
-    mimes: null,
-    guide: null,
-    validate: '',
-    max_n_min_length: null,
-    full_n_float_length: null,
-})
 
 const submit = () => {
     form.post(route('generator.pillar_type.store'), {
@@ -109,32 +109,32 @@ const submit = () => {
                             <div class="grid grid-cols-6 gap-4">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="date" class="block text-sm font-medium text-gray-700"> Name <span class="text-red-500">*</span> </label>
-                                    <input v-model="form.name" id="name" placeholder="Name" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <input v-model="form.name" id="name" placeholder="Name" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="validate" class="block text-sm font-medium text-gray-700"> Request Validate <span class="text-red-500">*</span> </label>
-                                    <input v-model="form.validate" @keyup="demoBody()" id="validate" placeholder="Request Validate" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <input v-model="form.validate" @keyup="demoBody()" id="validate" placeholder="Request Validate" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="max_n_min_length" class="block text-sm font-medium text-gray-700"> Max n Min Length Validation </label>
-                                    <input v-model="form.max_n_min_length" @keyup="demoBody()" id="max_n_min_length" placeholder="max: 255, min: 191" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <input v-model="form.max_n_min_length" @keyup="demoBody()" id="max_n_min_length" placeholder="max: 255, min: 191" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="full_n_float_length" class="block text-sm font-medium text-gray-700"> Full n Float Length </label>
-                                    <input v-model="form.full_n_float_length" @keyup="demoBody()" id="full_n_float_length" placeholder="5, 3 => 32145.154" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <input v-model="form.full_n_float_length" @keyup="demoBody()" id="full_n_float_length" placeholder="5, 3 => 32145.154" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
 
                                 <div class="col-span-6">
                                     <label for="mimes" class="block text-sm font-medium text-gray-700"> Mimes </label>
-                                    <input v-model="form.mimes" @keyup="demoBody()" id="mimes" placeholder="image => mimes:jpeg,png,jpg,gif,svg" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <input v-model="form.mimes" @keyup="demoBody()" id="mimes" placeholder="image => mimes:jpeg,png,jpg,gif,svg" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
 
                                 <div class="col-span-6">
                                     <label for="guide" class="block text-sm font-medium text-gray-700"> Guide </label>
-                                    <textarea v-model="form.guide" id="guide" placeholder="Guide Here..." rows="3" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-primary-400 focus:border-primary-400 border-gray-300 rounded" />
+                                    <textarea v-model="form.guide" id="guide" placeholder="Guide Here..." rows="3" type="text" class="mt-1 block w-full shadow-sm sm:text-sm focus:ring-gray-400 focus:border-gray-400 border-gray-300 rounded" />
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@ const submit = () => {
 
                         <div class="max-w-xl mx-auto">
                             <div class="flex justify-end">
-                                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                     <PlusIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                     Create
                                 </button>

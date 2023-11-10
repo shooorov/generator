@@ -56,7 +56,7 @@ const submit = () => {
                                 <div class="py-2 sm:grid sm:grid-cols-3 sm:gap-2">
                                     <dt class="text-sm leading-10 font-semibold text-gray-700 tracking-wider text-right pr-8"> Desk Name <span class="text-red-500">*</span> </dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        <input v-model="form.name" placeholder="Name" type="text" class="block w-full px-4 focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded">
+                                        <input v-model="form.name" placeholder="Name" type="text" class="block w-full px-4 focus:ring-gray-400 focus:border-gray-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded">
                                     </dd>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@ const submit = () => {
 
                             <div class="max-w-xl mx-auto">
                                 <div class="flex justify-end">
-                                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <PlusIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                         Create
                                     </button>

@@ -14,14 +14,6 @@ const props = defineProps({
     pillar_types: Array,
 })
 
-onMounted(() => {
-    $('#table').DataTable({
-        lengthMenu: [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
-        length: 10,
-        dom: "<'flex justify-center sm:justify-end mb-3'><'flex flex-col sm:flex-row justify-between'lf><'block overflow-auto'rt><'flex flex-col sm:flex-row justify-between'ip>",
-    });
-})
-
 const deleteRecord = (record_id) => {
     if (confirm("Do you really want to delete this pillar_type?")) {
         router.get(route('generator.pillar_type.destroy', record_id));
@@ -45,7 +37,7 @@ const breadcrumbs = [
                 </div>
 
                 <div class="mt-6 h-9 flex space-x-3 md:mt-0 md:ml-4">
-                    <Link :href="route('generator.pillar_type.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
+                    <Link :href="route('generator.pillar_type.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-400">
                         <PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                         Create
                     </Link>

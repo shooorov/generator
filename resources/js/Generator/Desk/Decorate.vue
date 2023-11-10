@@ -65,7 +65,7 @@ const submit = () => {
                     <Breadcrumb :breadcrumbs="breadcrumbs" />
                 </div>
                 <div class="mt-6 h-9 flex space-x-3 md:mt-0 md:ml-4">
-                    <Link :href="route('generator.desk.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-primary-400">
+                    <Link :href="route('generator.desk.create')" class="inline-flex items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-400">
                         <PlusIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                         Create
                     </Link>
@@ -96,7 +96,7 @@ const submit = () => {
                             Generate&nbsp;Files
                         </Link>
 
-                        <button type="submit" @click="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                        <button type="submit" @click="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                             <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                             Update
                         </button>
@@ -109,85 +109,85 @@ const submit = () => {
                             <div class="py-2 sm:grid sm:grid-cols-8 sm:gap-2">
                                 <!-- <dt class="text-sm leading-10 font-semibold text-gray-700 tracking-wider text-right pr-8"></dt> -->
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.has_filter" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.has_filter" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="has_filter" @click="form.has_filter = !(form.has_filter)" class="ml-5 block cursor-pointer"> Filter </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.has_opening" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.has_opening" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="has_opening" @click="form.has_opening = !(form.has_opening)" class="ml-5 block cursor-pointer"> Opening </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.has_description" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.has_description" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="has_description" @click="form.has_description = !(form.has_description)" class="ml-5 block cursor-pointer"> Description </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.has_remark" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.has_remark" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="has_remark" @click="form.has_remark = !(form.has_remark)" class="ml-5 block cursor-pointer"> Remark </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_cache" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_cache" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_cache" @click="form.generate_cache = !(form.generate_cache)" class="ml-5 block cursor-pointer"> Cache </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_pages" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_pages" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_pages" @click="form.generate_pages = !(form.generate_pages)" class="ml-5 block cursor-pointer"> Pages </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_model" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_model" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_model" @click="form.generate_model = !(form.generate_model)" class="ml-5 block cursor-pointer"> Model </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_seeder" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_seeder" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_seeder" @click="form.generate_seeder = !(form.generate_seeder)" class="ml-5 block cursor-pointer"> Seeder </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_migration" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_migration" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_migration" @click="form.generate_migration = !(form.generate_migration)" class="ml-5 block cursor-pointer"> Migration </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_controller" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_controller" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_controller" @click="form.generate_controller = !(form.generate_controller)" class="ml-5 block cursor-pointer"> Controller </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.generate_resources" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.generate_resources" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="generate_resources" @click="form.generate_resources = !(form.generate_resources)" class="ml-5 block cursor-pointer"> Resources </label>
                                     </div>
                                 </dd>
 
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                                        <input v-model="form.has_soft_deletes" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-primary-600 focus:border-primary-600 text-primary-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
+                                    <div class="mt-1 inline-flex items-center py-2 text-sm font-medium rounded text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600">
+                                        <input v-model="form.has_soft_deletes" type="checkbox" class="group-checkbox form-checkbox w-5 h-5 focus:ring-gray-600 focus:border-gray-600 text-gray-600 transition duration-150 ease-in-out rounded select-none cursor-pointer">
                                         <label for="has_soft_deletes" @click="form.has_soft_deletes = !(form.has_soft_deletes)" class="ml-5 block cursor-pointer"> SoftDeletes </label>
                                     </div>
                                 </dd>
@@ -212,7 +212,7 @@ const submit = () => {
                                         </th>
 
                                         <td>
-                                            <input v-model="pillar.decorating" placeholder="Position" type="text" class="block w-full px-2 focus:ring-none focus:ring-primary-400 focus:border-primary-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded" />
+                                            <input v-model="pillar.decorating" placeholder="Position" type="text" class="block w-full px-2 focus:ring-none focus:ring-gray-400 focus:border-gray-400 hover:bg-gray-100 focus:bg-transparent sm:text-sm border-gray-300 rounded" />
                                         </td>
 
                                         <td>
@@ -243,7 +243,7 @@ const submit = () => {
 
                         <div class="max-w-xl mx-auto">
                             <div class="flex justify-end">
-                                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                     <CheckBadgeIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                     Update
                                 </button>
