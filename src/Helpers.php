@@ -6,10 +6,9 @@ use Illuminate\Support\Str;
 
 class Helpers
 {
-
     public static function basePath(string $path): string
     {
-		return base_path($path);
+        return base_path($path);
         // return __DIR__.'/..'.$path;
     }
 
@@ -24,7 +23,7 @@ class Helpers
         fclose($fp);
     }
 
-	public static function getSpaces(int $highest_column_length = 20, int $column_length = 10): string
+    public static function getSpaces(int $highest_column_length = 20, int $column_length = 10): string
     {
         return '';
         $padding_char = ' ';
@@ -66,16 +65,16 @@ class Helpers
         $name = class_basename($record);
         $class = get_class($record);
         $object = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
-        $object_id = $object.'_id';
+        $object_id = $object . '_id';
         $object_plural = Str::plural($object);
 
         $params = [
-            'id' => 'id => '.$record->id,
-            'name' => 'name => '.$name,
-            'class' => 'class => '.$class,
-            'object' => 'object => '.$object,
-            'object_id' => 'object_id => '.$object_id,
-            'object_plural' => 'object_plural => '.$object_plural,
+            'id' => 'id => ' . $record->id,
+            'name' => 'name => ' . $name,
+            'class' => 'class => ' . $class,
+            'object' => 'object => ' . $object,
+            'object_id' => 'object_id => ' . $object_id,
+            'object_plural' => 'object_plural => ' . $object_plural,
         ];
 
         print_r(implode('<br>', $params));
@@ -91,7 +90,7 @@ class Helpers
 
             $content = file_get_contents($file_path);
             $contain = str_contains($content, $object_id) || str_contains($content, $object_plural);
-            $not_self = ! str_contains($content, "Schema::create('$object_plural', function");
+            $not_self = !str_contains($content, "Schema::create('$object_plural', function");
             if ($not_self && $contain) {
                 $sub_array = [];
                 foreach (file($file_path) as $line_index => $line_content) {
@@ -106,7 +105,7 @@ class Helpers
                         $sub_array = array_unique($sub_array);
                     }
                 }
-                $array[] = $file.' => '.implode('||', $sub_array);
+                $array[] = $file . ' => ' . implode('||', $sub_array);
             }
         }
 
@@ -119,16 +118,16 @@ class Helpers
         $name = class_basename($record);
         $class = get_class($record);
         $object = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
-        $object_id = $object.'_id';
+        $object_id = $object . '_id';
         $object_plural = Str::plural($object);
 
         $params = [
-            'id' => 'id => '.$record->id,
-            'name' => 'name => '.$name,
-            'class' => 'class => '.$class,
-            'object' => 'object => '.$object,
-            'object_id' => 'object_id => '.$object_id,
-            'object_plural' => 'object_plural => '.$object_plural,
+            'id' => 'id => ' . $record->id,
+            'name' => 'name => ' . $name,
+            'class' => 'class => ' . $class,
+            'object' => 'object => ' . $object,
+            'object_id' => 'object_id => ' . $object_id,
+            'object_plural' => 'object_plural => ' . $object_plural,
         ];
 
         print_r(implode('<br>', $params));
@@ -144,7 +143,7 @@ class Helpers
 
             $content = file_get_contents($file_path);
             $contain = str_contains($content, $object_id) || str_contains($content, $object_plural);
-            $not_self = ! str_contains($content, "Schema::create('$object_plural', function");
+            $not_self = !str_contains($content, "Schema::create('$object_plural', function");
             if ($not_self && $contain) {
                 $sub_array = [];
                 foreach (file($file_path) as $line_content) {
@@ -159,7 +158,7 @@ class Helpers
                         $sub_array = array_unique($sub_array);
                     }
                 }
-                $array[] = $file.' => '.implode('||', $sub_array);
+                $array[] = $file . ' => ' . implode('||', $sub_array);
             }
         }
 
@@ -248,7 +247,7 @@ class Helpers
                     }
                 }
 
-                if (! $table_open && (str_contains($line_content, 'Schema::create') ^ str_contains($line_content, 'Schema::table'))) { // getting table
+                if (!$table_open && (str_contains($line_content, 'Schema::create') ^ str_contains($line_content, 'Schema::table'))) { // getting table
                     $table_open = true;
                     $new_table_before = "Schema::create('";
                     $old_table_before = "Schema::table('";
@@ -264,7 +263,7 @@ class Helpers
 
                     continue;
                 }
-                if (! $table_open || $skip || ! str_contains($line_content, 'table->') || ! str_contains($line_content, "'")) {
+                if (!$table_open || $skip || !str_contains($line_content, 'table->') || !str_contains($line_content, "'")) {
                     continue;
                 }
 
@@ -291,7 +290,7 @@ class Helpers
                 // dd($tables, $key, $column);
                 $dummy_array["$column"]['type'] = $type;
             }
-            if (! in_array($table, $filter)) {
+            if (!in_array($table, $filter)) {
                 continue;
             }
 
@@ -310,19 +309,19 @@ class Helpers
             foreach ($columns as $key => $column) {
                 if ($column['type'] == 'foreignId') {
                     $child = $column['table'];
-                    $column_array[] = $key." int [ref: > $child.id]";
+                    $column_array[] = $key . " int [ref: > $child.id]";
                 } else {
                     // $column_array[] = $key . ' varchar';
                 }
             }
-            $content .= $start."\n    ".implode("\n    ", $column_array)."\n".$end."\n\n";
+            $content .= $start . "\n    " . implode("\n    ", $column_array) . "\n" . $end . "\n\n";
         }
 
         $file_path = base_path('files\database\db-diagram.io.txt');
         Helpers::makeFile($content, $file_path ?? public_path());
     }
 
-	public static function modelStatusToArray(array $array): array
+    public static function modelStatusToArray(array $array): array
     {
         $types = [];
         foreach ($array as $key => $value) {
@@ -371,7 +370,7 @@ class Helpers
         $strings = self::getStringsFromRecord($record);
 
         $children = [];
-		$file_name = $strings->name;
+        $file_name = $strings->name;
         $file_path = Helpers::basePath("app/Models/{$file_name}.php");
 
         $file_in_array = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -394,5 +393,21 @@ class Helpers
         }
 
         return $children;
+    }
+
+    public static function getStringSingular($string)
+    {
+        return Str::of($string)->when(!Str::endsWith($string, 'ves'), function ($string) {
+            return $string->singular();
+        })->when(Str::endsWith($string, 'ves'), function ($string) {
+            return $string->replace('ves', 've');
+        })->value;
+    }
+
+    public static function getStringStudly($string)
+    {
+        $string = self::getStringSingular($string);
+
+        return Str::of($string)->studly()->value;
     }
 }
